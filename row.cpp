@@ -55,6 +55,7 @@ row::row(){
     place=" ";
 }
 
+
 row::row(const row &in){
     year = in.year;
     month = in.month;
@@ -67,6 +68,7 @@ row::row(const row &in){
     place = in.place;
 
 }
+
 
 row &row::operator=(const row &in){
     year = in.year;
@@ -136,4 +138,9 @@ QString row::getHeader(int ind)
 int row::getColumns()
 {
     return sizeof(header)/sizeof(header[0]);
+}
+
+int row::getVars()
+{
+    return sizeof(fields)/sizeof(fields[0]);
 }

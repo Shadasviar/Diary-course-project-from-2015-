@@ -14,6 +14,7 @@ class row
 {
 public:   
 
+
     int year;
     int month;
     int day;
@@ -23,7 +24,12 @@ public:
     string name;
     string place;
 
+
     long long date;
+
+    //tuple<int, int, int, int, int, int, string, string> fields;
+
+    //enum fields_names{year, month, day, hour, minutes, duration, name, place, last};
 
     void* fields[NUM_VARIABLES] = {&year, &month, &day, &hour, &minutes, &duration, &name, &place};
 
@@ -38,6 +44,7 @@ public:
     QVariant getItem(int ind);
     static QString getHeader(int ind);
     static int getColumns();
+    static int getVars();
 
     static bool compareDateAsc(row d1, row d2) {return d1.date<d2.date;}
     static bool compareDateDes(row d1, row d2) {return d1.date>d2.date;}
@@ -49,6 +56,7 @@ public:
     static bool compareNameDes(row n1, row n2) {return n1.name>n2.name;}
     static bool comparePlaceAsc(row n1, row n2) {return n1.place<n2.place;}
     static bool comparePlaceDes(row n1, row n2) {return n1.place>n2.place;}
+
 
 private:
     static QString header[];
