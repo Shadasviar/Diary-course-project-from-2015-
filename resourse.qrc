@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>info.png</file>
+        <file>AlertIcon.png</file>
+        <file>Start-Menu-Search-icon.png</file>
+        <file>strelka4.png</file>
+        <file>pitr_green_arrows_set_4.png</file>
+        <file>48px-Crystal_Clear_action_apply.png</file>
+        <file>inf.png</file>
+    </qresource>
+</RCC>
