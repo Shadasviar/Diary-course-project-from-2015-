@@ -55,6 +55,32 @@ row::row(){
     place=" ";
 }
 
+row::row(const row &in){
+    year = in.year;
+    month = in.month;
+    day = in.day;
+    hour = in.hour;
+    minutes = in.minutes;
+    date = in.date;
+    duration = in.duration;
+    name = in.name;
+    place = in.place;
+
+}
+
+row &row::operator=(const row &in){
+    year = in.year;
+    month = in.month;
+    day = in.day;
+    hour = in.hour;
+    minutes = in.minutes;
+    date = in.date;
+    duration = in.duration;
+    name = in.name;
+    place = in.place;
+    return *this;
+}
+
 QVariant row::getItem(int ind){
     QString qs;
     switch (ind) {

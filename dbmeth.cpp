@@ -33,60 +33,12 @@ void dbmeth::DelRow(int index)
 row dbmeth::GetRow(int index)
 {
     if(index<=Row.size()){
-        return Row[index];
+        return Row.at(index);
     }else{
         cout<<"no rows having this index"<<endl;
     }
 }
 
-void dbmeth::EditRow(int index, int field, int value)
-{
-    row r;
-        r=GetRow(index);
-        switch(field){
-        case 1:
-            r.year=value;
-            break;
-        case 2:
-            r.month=value;
-            break;
-        case 3:
-            r.day=value;
-            break;
-        case 4:
-            r.hour=value;
-            break;
-        case 5:
-            r.minutes=value;
-            break;
-        case 6:
-            r.duration=value;
-            break;
-        default:
-            cout<<"Error of field number\n";
-            break;
-        }
-        r.date=setDate(r);
-        Row.replace(index,r);
-}
-
-void dbmeth::EditRow(int index, int field, string value)
-{
-    row r;
-        r=GetRow(index);
-        switch(field){
-        case 7:
-            r.name=value;
-            break;
-        case 8:
-            r.place=value;
-            break;
-        default:
-            cout<<"Error of field number\n";
-            break;
-        }
-        Row.replace(index,r);
-}
 
 QString dbmeth::ShowNearest(QList<row> Row)
 {

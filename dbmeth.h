@@ -16,8 +16,6 @@ public:
     void Add(row r);
     void DelRow(int index);
     row GetRow(int index);
-    void EditRow(int index, int field, int value);
-    void EditRow(int index, int field, string value);
 
     QString ShowNearest(QList<row> Row);
     QString transferMes();
@@ -51,6 +49,26 @@ private:
     QList<row> bufer;
     bool PastTransfer(QList<row>::iterator ite, int row, operation index);
     long setDate(row r);
+
+
+/*Template functions section
+*
+*
+*--------------------------------------------------------------------------------------------------------
+* */
+
+public:
+
+    template <typename T>
+    void EditRow(int index, int field, T value)
+    {
+        row r;
+            r=GetRow(index);
+            *(T*)r.fields[field-1] = value;
+            r.date=setDate(r);
+            Row.replace(index,r);
+    }
+
 };
 
 #endif // DBMETH_H

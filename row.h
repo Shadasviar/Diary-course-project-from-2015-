@@ -6,38 +6,35 @@
 #include <QString>
 #include <QByteArray>
 #include <QDataStream>
+#include <tuple>
+#define NUM_VARIABLES 8
 
 using namespace std;
 class row
 {
-public:
-    string name;
-    string place;
-    long long date;
+public:   
+
     int year;
     int month;
     int day;
     int hour;
     int minutes;
     int duration;
+    string name;
+    string place;
 
-    /*friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int file_version){
-        ar & name;
-        ar & place;
-        ar & date;
-        ar & year;
-        ar & month;
-        ar & day;
-        ar & hour;
-        ar & minutes;
-        ar & duration;
-     };*/
+    long long date;
+
+    void* fields[NUM_VARIABLES] = {&year, &month, &day, &hour, &minutes, &duration, &name, &place};
+
+
     friend QDataStream &operator <<(QDataStream &stream, const row &A);
     friend QDataStream &operator >>(QDataStream &stream, row &A);
 
     row();
+    row(const row &);
+    row & operator=(const row &);
+
     QVariant getItem(int ind);
     static QString getHeader(int ind);
     static int getColumns();
