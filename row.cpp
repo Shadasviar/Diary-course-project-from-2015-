@@ -4,6 +4,7 @@
 #include <sstream>
 #include <QString>
 #include <QtCore>
+#include <ctime>
 
 QString row::header[]={QString::fromUtf8(QT_TR_NOOP("Date")),
                        QString::fromUtf8(QT_TR_NOOP("Time")),
@@ -20,6 +21,7 @@ QDataStream &operator <<(QDataStream &stream, const row &A)
     stream << A.minutes;
     stream << A.duration;
     stream << A.date;
+    stream << A.time;
     stream << QString::fromStdString(A.name);
     stream << QString::fromStdString(A.place);
     return stream;
@@ -34,6 +36,7 @@ QDataStream &operator >>(QDataStream &stream, row &A)
     stream >> A.minutes;
     stream >> A.duration;
     stream >> A.date;
+    stream >> A.time;
     QString temp;
     stream >> temp;
     A.name = temp.toStdString();
@@ -51,6 +54,7 @@ row::row(){
     minutes=0;
     duration=0;
     date=0;
+    time = 0;
     name=" ";
     place=" ";
 }
@@ -66,7 +70,7 @@ row::row(const row &in){
     duration = in.duration;
     name = in.name;
     place = in.place;
-
+    time = in.time;
 }
 
 
@@ -80,7 +84,22 @@ row &row::operator=(const row &in){
     duration = in.duration;
     name = in.name;
     place = in.place;
+    time = in.time;
     return *this;
+}
+
+void row::SetTimeBySecFrom70()
+{
+    time_t sec = (time_t)date;
+    struct tm *timeinf;
+    timeinf = localtime(&sec);
+
+    year = timeinf->tm_year + 1900;
+    month = timeinf->tm_mon + 1;
+    day = timeinf->tm_mday;
+    hour = timeinf->tm_hour;
+    minutes = timeinf->tm_min;
+    time = (hour*60 + minutes)*60;
 }
 
 QVariant row::getItem(int ind){

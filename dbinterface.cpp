@@ -1,6 +1,7 @@
 #include "dbinterface.h"
 #include "transfer.h"
 #include "dbmeth.h"
+#include <QDateTime>
 #include <QDate>
 #include <QTime>
 #include <QDebug>
@@ -74,39 +75,42 @@ QVariant dbinterface::headerData(int section, Qt::Orientation orientation, int r
     }else{
         return QString("%1").arg( section + 1 );
     }
-    Qt::CheckStateRole;
+    //Qt::CheckStateRole;
 }
 
 bool dbinterface::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    QDate qd;
-    QTime qt;
+
     QString qs;
      if (index.isValid() && role == Qt::EditRole){
          if(index.column()==0){
+             QDateTime qdt;
+             qdt.setTime_t((uint)dbm->Row.at(index.row()).date);
+             QDate qd;
              qd= QDate::fromString(value.toString(),"yyyy.M.dd");
-             dbm->EditRow(index.row(),1,qd.year());
-             dbm->EditRow(index.row(),2,qd.month());
-             dbm->EditRow(index.row(),3,qd.day());
+             qdt.setDate(qd);
+             long long unixtime = (long long)qdt.toTime_t();
+             dbm->EditRow(index.row(), index.column(), unixtime);
          }
          if(index.column()==1){
+             QDateTime qdt;
+             qdt.setTime_t((uint)dbm->Row.at(index.row()).date);
+             QTime qt;
              qt= QTime::fromString(value.toString(),"hh:mm");
-             dbm->EditRow(index.row(),4,qt.hour());
-             dbm->EditRow(index.row(),5,qt.minute());
+             qdt.setTime(qt);
+             long long unixtime = (long long)qdt.toTime_t();
+             dbm->EditRow(index.row(), index.column()-1, unixtime);
          }
          if(index.column()==2){
-             dbm->EditRow(index.row(),6,value.toInt());
+             dbm->EditRow(index.row(),index.column(),value.toInt());
          }
-         if(index.column()==3){
+         if(index.column()==3 || index.column()==4){
              qs=value.toString();
-             dbm->EditRow(index.row(),7,qs.toStdString());
-         }
-         if(index.column()==4){
-             qs=value.toString();
-             dbm->EditRow(index.row(),8,qs.toStdString());
+             dbm->EditRow(index.row(),index.column(),qs.toStdString());  //type only is important here
          }
      }
      dbm->Write(dbm->Row);
+     return true;
 }
 
 Qt::ItemFlags dbinterface::flags(const QModelIndex &index) const
@@ -181,43 +185,10 @@ void dbinterface::delPast()
 
 void dbinterface::sortByColumn(int column, Qt::SortOrder order)
 {
-    switch (column) {
-    case 0:{
-        if(order==Qt::AscendingOrder)
-            dbm->sortByDate(dbm->Row, dbm->asc);
-        if(order==Qt::DescendingOrder)
-            dbm->sortByDate(dbm->Row,dbm->desc);
-        break;
-    }
-    case 1:{
-        if(order==Qt::AscendingOrder)
-            dbm->sortByTime(dbm->Row,dbm->asc);
-        if(order==Qt::DescendingOrder)
-            dbm->sortByTime(dbm->Row,dbm->desc);
-        break;
-    }
-    case 2:{
-        if(order==Qt::AscendingOrder)
-            dbm->sortByDuration(dbm->Row,dbm->asc);
-        if(order==Qt::DescendingOrder)
-            dbm->sortByDuration(dbm->Row,dbm->desc);
-        break;
-    }
-    case 3:
-        if(order==Qt::AscendingOrder)
-            dbm->sortByName(dbm->Row,dbm->asc);
-        if(order==Qt::DescendingOrder)
-            dbm->sortByName(dbm->Row,dbm->desc);
-        break;
-    case 4:
-        if(order==Qt::AscendingOrder)
-            dbm->sortByPlace(dbm->Row,dbm->asc);
-        if(order==Qt::DescendingOrder)
-            dbm->sortByPlace(dbm->Row,dbm->desc);
-        break;
-    default:
-        break;
-    }
+    dbmeth::order ord = dbm->asc;
+    if(order == Qt::SortOrder::AscendingOrder) ord = dbm->asc;
+    if(order == Qt::SortOrder::DescendingOrder) ord = dbm->desc;
+    dbm->sortByColumn(dbm->Row, ord, column);
     dataChanged(QModelIndex(),QModelIndex());
 }
 

@@ -9,7 +9,7 @@ public:
     int day;
     int hour;
     int min;
-    long int secfrom70;
+    long long secfrom70;
 
     czas();
     long int GetUnixTime(czas &A);

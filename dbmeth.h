@@ -39,6 +39,9 @@ public:
     void sortByName(QList<row> &Row, order order);
     void sortByPlace(QList<row> &Row, order order);
 
+    void sortByColumn(QList<row> &Row, order order, int i_column);
+
+
     QList<row> Row;
     QList<row>::iterator ite;
 
@@ -63,10 +66,31 @@ public:
     void EditRow(int index, int field, T value)
     {
         row r;
-            r=GetRow(index);
-            *(T*)r.fields[field-1] = value;
-            r.date=setDate(r);
-            Row.replace(index,r);
+        r=GetRow(index);
+        *(T*)r.fields[field] = value;
+        //r.date=setDate(r);
+        r.SetTimeBySecFrom70();
+        Row.replace(index,r);
+    }
+
+
+    template <typename T>
+    void sort_by_column(QList<row> &Row, dbmeth::order order, int i_column)
+    {
+        switch(order){
+        case asc:
+            sort(Row.begin(),Row.end(),[i_column](row r1, row r2){
+                return *(T*)r1.fields[i_column] < *(T*)r2.fields[i_column];
+            });
+            break;
+        case desc:
+            sort(Row.begin(),Row.end(),[i_column](row r1, row r2){
+                return *(T*)r1.fields[i_column] > *(T*)r2.fields[i_column];
+            });
+            break;
+        default:
+            break;
+        }
     }
 
 };

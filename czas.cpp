@@ -34,6 +34,7 @@ long czas::GetUnixTime(czas &A)
     return sec;
 }
 
+
 int czas::GetCurrentTime()
 {
     time_t sec;

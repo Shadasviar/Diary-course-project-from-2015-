@@ -45,7 +45,7 @@ QString dbmeth::ShowNearest(QList<row> Row)
     QString qs;
         if(Row.size()!=0){
             bufer=Row;
-            sortByDate(bufer,asc);
+            //sortByDate(bufer,asc);
             czas cz;
             bool b =false;
                 for(int i=0;i<Row.size() && !b;i++){
@@ -62,6 +62,7 @@ QString dbmeth::ShowNearest(QList<row> Row)
             qs=QObject::tr("No events");
             return qs;
         }
+        return qs;
 }
 
 QString dbmeth::transferMes()
@@ -300,75 +301,20 @@ int dbmeth::getColumns()
     return row::getColumns();
 }
 
-void dbmeth::sortByDate(QList<row> &Row, dbmeth::order order)
-{
-    switch (order) {
-    case asc:
-        sort(Row.begin(),Row.end(),row::compareDateAsc);
-        break;
-    case desc:
-        sort(Row.begin(),Row.end(),row::compareDateDes);
-        break;
-    default:
-        break;
+
+void dbmeth::sortByColumn(QList<row> &Row, dbmeth::order order, int i_column){
+    if(i_column >= row::t_long_long && i_column <= row::t_long_long_last){
+        sort_by_column<long long>(Row, order, i_column);
     }
+    else if(i_column <= row::t_string_last && i_column >= row::t_string){
+        sort_by_column<string>(Row, order, i_column);
+    }
+    else{
+        sort_by_column<int>(Row, order, i_column);
+    }
+
 }
 
-void dbmeth::sortByTime(QList<row> &Row, dbmeth::order order)
-{
-    switch (order) {
-    case asc:
-        sort(Row.begin(),Row.end(),row::compareTimeAsc);
-        break;
-    case desc:
-        sort(Row.begin(),Row.end(),row::compareTimeDes);
-        break;
-    default:
-        break;
-    }
-}
-
-void dbmeth::sortByDuration(QList<row> &Row, dbmeth::order order)
-{
-    switch (order) {
-    case asc:
-        sort(Row.begin(),Row.end(),row::compareDurationAsc);
-        break;
-    case desc:
-        sort(Row.begin(),Row.end(),row::compareDurationDes);
-        break;
-    default:
-        break;
-    }
-}
-
-void dbmeth::sortByName(QList<row> &Row, dbmeth::order order)
-{
-    switch (order) {
-    case asc:
-        sort(Row.begin(),Row.end(),row::compareNameAsc);
-        break;
-    case desc:
-        sort(Row.begin(),Row.end(),row::compareNameDes);
-        break;
-    default:
-        break;
-    }
-}
-
-void dbmeth::sortByPlace(QList<row> &Row, dbmeth::order order)
-{
-    switch (order) {
-    case asc:
-        sort(Row.begin(),Row.end(),row::comparePlaceAsc);
-        break;
-    case desc:
-        sort(Row.begin(),Row.end(),row::comparePlaceDes);
-        break;
-    default:
-        break;
-    }
-}
 
 bool dbmeth::getRowSwaped()
 {
@@ -404,5 +350,6 @@ long dbmeth::setDate(row r)
         cz.hour=r.hour;
         cz.min=r.minutes;
         r.date=cz.GetUnixTime(cz);
+        r.time = (r.minutes + r.hour*60)*60;
         return r.date;
 }
