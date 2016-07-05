@@ -1,7 +1,8 @@
+0a
 /* -*- Mode: C++; indent-tabs-mode: t; c-basic-offset: 4; tab-width: 2 -*-  */
 /*
  * This file is part of Diary. 
- * dbio.h
+ * PROJECTNAME
  * Copyright (C) Uladzislau Harbuz 2016 
  * 
  * Diary is free software: you can redistribute it and/or modify it
@@ -17,19 +18,6 @@
  * You should have received a copy of the GNU General Public License along
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef DBIO_H
-#define DBIO_H
-#include "row.h"
+.
+wq
 
-class dbio
-{
-public:
-    dbio();
-    void Write(QList<row> &Row);
-    void Read(QList<row> &lst);
-
-private:
-
-};
-
-#endif // DBIO_H
