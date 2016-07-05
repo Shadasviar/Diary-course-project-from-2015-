@@ -52,12 +52,6 @@ public:
     int getColumns();
     bool getRowSwaped();
 
-    void sortByDate(QList<row> &Row, order order);
-    void sortByTime(QList<row> &Row, order order);
-    void sortByDuration(QList<row> &Row, order order);
-    void sortByName(QList<row> &Row, order order);
-    void sortByPlace(QList<row> &Row, order order);
-
     void sortByColumn(QList<row> &Row, order order, int i_column);
 
 
