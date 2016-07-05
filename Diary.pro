@@ -13,36 +13,60 @@ TEMPLATE = app
 CONFIG += c++14
 
 
-SOURCES += main.cpp\
-        diary.cpp \
-    row.cpp \
-    dbmeth.cpp \
-    czas.cpp \
-    dbinterface.cpp \
-    dbio.cpp \
-    info.cpp \
-    transfer.cpp \
-    nakladki.cpp \
-    settings.cpp
+SOURCES += Src/czas.cpp \
+    Src/dbinterface.cpp \
+    Src/dbio.cpp \
+    Src/dbmeth.cpp \
+    Src/diary.cpp \
+    Src/info.cpp \
+    Src/main.cpp \
+    Src/nakladki.cpp \
+    Src/row.cpp \
+    Src/settings.cpp \
+    Src/transfer.cpp
 
-HEADERS  += diary.h \
-    row.h \
-    dbmeth.h \
-    czas.h \
-    dbinterface.h \
-    dbio.h \
-    info.h \
-    transfer.h \
-    nakladki.h \
-    settings.h
+HEADERS  += Src/diary.h \
+    Src/row.h \
+    Src/dbmeth.h \
+    Src/czas.h \
+    Src/dbinterface.h \
+    Src/dbio.h \
+    Src/info.h \
+    Src/transfer.h \
+    Src/nakladki.h \
+    Src/settings.h \
 
-FORMS    += diary.ui \
-    info.ui \
-    transfer.ui \
-    nakladki.ui \
-    settings.ui
+FORMS    += UI_src/diary.ui \
+    UI_src/info.ui \
+    UI_src/transfer.ui \
+    UI_src/nakladki.ui \
+    UI_src/settings.ui \
 
 RESOURCES += \
-    resourse.qrc
+    Resources/resourse.qrc
 
-TRANSLATIONS+=by.ts
+TRANSLATIONS+= Translations/by.ts
+
+DISTFILES += \
+    diag/diag.docbook \
+    Build Diary/db.bin \
+    db.bin \
+    Build Diary/Diary \
+    Build Diary/by.qm \
+    Translations/by.qm \
+    add_license \
+    Diary_PL_win.anjuta \
+    diag/class diagram.png \
+    Resources/48px-Crystal_Clear_action_apply.png \
+    Resources/AlertIcon.png \
+    Resources/Button-Info-icon.png \
+    Resources/inf.png \
+    Resources/info.png \
+    Resources/pitr_green_arrows_set_4.png \
+    Resources/Start-Menu-Search-icon.png \
+    Resources/strelka4.png \
+    Resources/скрин.png \
+    lic \
+    LICENSE \
+    Translations/by.ts \
+    diag.xmi
