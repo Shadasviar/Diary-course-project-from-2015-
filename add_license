@@ -1,7 +1,0 @@
-#!/bin/bash
-
-for NAME in $(ls | grep -E '(.cpp$|.h$)'); do
-  sed -i "s/PROJECTNAME/$NAME/g" lic
-  cat lic | ed -s $NAME
-  sed -i "s/$NAME/PROJECTNAME/g" lic
-done
