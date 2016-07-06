@@ -64,7 +64,7 @@ QString dbmeth::ShowNearest(QList<row> Row)
     QString qs;
         if(Row.size()!=0){
             bufer=Row;
-            //sortByDate(bufer,asc);
+            sortByColumn(bufer, asc, 0);
             czas cz;
             bool b =false;
                 for(int i=0;i<Row.size() && !b;i++){
@@ -246,21 +246,18 @@ void dbmeth::findToday(type_of_find_day index)
         counter=0;
         st = format_date_string(str, cz);
         find(st);
-        //cz.~czas();
         break;
     case next:
         counter++;
         cz.day+=counter;
         st = format_date_string(str, cz);
         find(st);
-        //cz.~czas();
         break;
     case previous:
         counter--;
         cz.day+=counter;
         st = format_date_string(str, cz);
         find(st);
-        //cz.~czas();
         break;
     default:
         break;
