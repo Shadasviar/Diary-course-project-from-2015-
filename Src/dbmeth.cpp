@@ -236,58 +236,31 @@ void dbmeth::find(string finded)
     rowSwaped=true;
 }
 
-void dbmeth::findToday(int index)
+void dbmeth::findToday(type_of_find_day index)
 {
     string st;
     QString str;
     czas cz;
     switch (index) {
-    case 0:
+    case current:
         counter=0;
-        if(cz.year==0){
-              str="0000";
-        }else str=QString::number(cz.year);
-        str.append(".");
-        if(cz.month<10) str.append("0");
-        str.append(QString::number(cz.month));
-        str.append(".");
-        if(cz.day<10) str.append("0");
-        str.append(QString::number(cz.day));
-        st=str.toStdString();
+        st = format_date_string(str, cz);
         find(st);
-        cz.~czas();
+        //cz.~czas();
         break;
-    case 1:
+    case next:
         counter++;
         cz.day+=counter;
-        if(cz.year==0){
-              str="0000";
-        }else str=QString::number(cz.year);
-        str.append(".");
-        if(cz.month<10) str.append("0");
-        str.append(QString::number(cz.month));
-        str.append(".");
-        if(cz.day<10) str.append("0");
-        str.append(QString::number(cz.day));
-        st=str.toStdString();
+        st = format_date_string(str, cz);
         find(st);
-        cz.~czas();
+        //cz.~czas();
         break;
-    case 2:
+    case previous:
         counter--;
         cz.day+=counter;
-        if(cz.year==0){
-              str="0000";
-        }else str=QString::number(cz.year);
-        str.append(".");
-        if(cz.month<10) str.append("0");
-        str.append(QString::number(cz.month));
-        str.append(".");
-        if(cz.day<10) str.append("0");
-        str.append(QString::number(cz.day));
-        st=str.toStdString();
+        st = format_date_string(str, cz);
         find(st);
-        cz.~czas();
+        //cz.~czas();
         break;
     default:
         break;
@@ -371,4 +344,17 @@ long dbmeth::setDate(row r)
         r.date=cz.GetUnixTime(cz);
         r.time = (r.minutes + r.hour*60)*60;
         return r.date;
+}
+
+string dbmeth::format_date_string(QString str, const czas &cz){
+    if(cz.year==0){
+          str="0000";
+    }else str=QString::number(cz.year);
+    str.append(".");
+    if(cz.month<10) str.append("0");
+    str.append(QString::number(cz.month));
+    str.append(".");
+    if(cz.day<10) str.append("0");
+    str.append(QString::number(cz.day));
+    return str.toStdString();
 }

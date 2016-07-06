@@ -31,6 +31,8 @@ class dbmeth : public dbio
 public:
     enum operation {do_nothing, del};
     enum order{asc, desc};
+    enum type_of_find_day{previous, current, next};
+
     dbmeth();
     void Add(row r);
     void DelRow(int index);
@@ -44,7 +46,7 @@ public:
     int Transfer(operation index);
     bool GetPast(int index);
     void find(string finded);
-    void findToday(int index);
+    void findToday(type_of_find_day index);
     void filterOff();
 
     int RowsNum(); 
@@ -53,7 +55,6 @@ public:
     bool getRowSwaped();
 
     void sortByColumn(QList<row> &Row, order order, int i_column);
-
 
     QList<row> Row;
     QList<row>::iterator ite;
@@ -65,6 +66,7 @@ private:
     QList<row> bufer;
     bool PastTransfer(QList<row>::iterator ite, int row, operation index);
     long setDate(row r);
+    string format_date_string(QString str, const czas &cz);
 
 
 /*Template functions section

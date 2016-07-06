@@ -43,7 +43,7 @@ public:
     void delPast();
 
     void find(QString finded);
-    void findToday(int index);
+    void findToday(dbmeth::type_of_find_day index);
 
 protected:
     bool insertRows(int row, int count, const QModelIndex &parent);

@@ -90,17 +90,17 @@ void Diary::on_find_button_clicked()
 
 void Diary::on_today_button_clicked()
 {
-    dbi.findToday(0);
+    dbi.findToday(dbmeth::current);
 }
 
 void Diary::on_last_day_button_clicked()
 {
-    dbi.findToday(2);
+    dbi.findToday(dbmeth::previous);
 }
 
 void Diary::on_next_day_button_clicked()
 {
-    dbi.findToday(1);
+    dbi.findToday(dbmeth::next);
 }
 
 void Diary::on_return_button_clicked()

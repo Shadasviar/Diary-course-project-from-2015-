@@ -52,7 +52,7 @@ void dbinterface::find(QString finded)
     dataChanged(QModelIndex(),QModelIndex());
 }
 
-void dbinterface::findToday(int index)
+void dbinterface::findToday(dbmeth::type_of_find_day index)
 {
     dbm->findToday(index);
     dataChanged(QModelIndex(),QModelIndex());
