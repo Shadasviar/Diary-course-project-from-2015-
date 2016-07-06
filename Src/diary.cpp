@@ -33,6 +33,8 @@ Diary::Diary(QWidget *parent) :
     ui->setupUi(this);
     ui->tableView->setModel(&dbi);
     ui->Label_name->setText(dbi.nearest());
+    Settings *set = new Settings(0, this);
+    set->init_settings();
     QObject::connect(ui->tableView->horizontalHeader(),SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),&dbi,SLOT(sortByColumn(int,Qt::SortOrder)));
 }
 

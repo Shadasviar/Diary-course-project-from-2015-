@@ -22,6 +22,7 @@
 
 #include <QWizardPage>
 #include "diary.h"
+#include <QDataStream>
 
 namespace Ui {
 class Settings;
@@ -33,15 +34,27 @@ class Settings : public QWizardPage
 
 public:
     explicit Settings(QWidget *parent, Diary *diary_in);
+    void init_settings();
     ~Settings();
     QFont font_for_widget;
 
 private slots:
     void on_Apply_settings_button_clicked();
 
+    void on_Cancel_settings_button_clicked();
+
+    void on_Save_settings_button_clicked();
+
 private:
     Ui::Settings *ui;
     Diary *diary;
+
+    void write_to_file();
+    void read_file();
+    friend QDataStream &operator <<(QDataStream &stream, const Settings &A);
+    friend QDataStream &operator >>(QDataStream &stream, Settings &A);
+
+    int font_size = 13;
 };
 
 #endif // SETTINGS_H
