@@ -25,6 +25,8 @@
 
 int main(int argc, char *argv[])
 {
+    //QGuiApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_Use96Dpi);
     QApplication a(argc, argv);
     QTranslator *qt_translator = new QTranslator;
     QString file_translate = QApplication::applicationDirPath () + "/by.qm";
