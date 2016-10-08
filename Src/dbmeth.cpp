@@ -53,7 +53,7 @@ void dbmeth::DelRow(int index)
 
 row dbmeth::GetRow(int index)
 {
-    if(index<=Row.size()){
+    if(index < Row.size()){
         return Row.at(index);
     }else{
         throw std::logic_error("No rows having index" + std::to_string(index));

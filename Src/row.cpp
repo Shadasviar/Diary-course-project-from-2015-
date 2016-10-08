@@ -31,6 +31,37 @@ QString row::header[]={QString::fromUtf8(QT_TR_NOOP("Date")),
                        QString::fromUtf8(QT_TR_NOOP("Name")),
                        QString::fromUtf8(QT_TR_NOOP("Place"))};
 
+
+row::row(const row &in){
+    year = in.year;
+    month = in.month;
+    day = in.day;
+    hour = in.hour;
+    minutes = in.minutes;
+    date = in.date;
+    duration = in.duration;
+    name = in.name;
+    place = in.place;
+    time = in.time;
+}
+
+
+row &row::operator=(const row &in){
+    year = in.year;
+    month = in.month;
+    day = in.day;
+    hour = in.hour;
+    minutes = in.minutes;
+    date = in.date;
+    duration = in.duration;
+    name = in.name;
+    place = in.place;
+    time = in.time;
+    return *this;
+}
+
+
+
 QDataStream &operator <<(QDataStream &stream, const row &A)
 {
     stream << A.year;
