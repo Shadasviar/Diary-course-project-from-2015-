@@ -29,19 +29,13 @@ Settings::Settings(QWidget *parent, Diary *diary_in) :
     ui->setupUi(this);
     ui->Font_size_field->setValidator(new QIntValidator(5,100,this));
     diary = diary_in;
-    QFile file(QString("settings"));
-    file.open(QFile::ReadOnly);
-    if(file.isOpen()){
-        file.close();
-    }else{
-        write_to_file();
-    }
+    this->ui->dpi96_checkbox->setChecked(set.use_96dpi());
 }
+
 
 void Settings::init_settings()
 {
-    read_file();
-    font_for_widget.setPixelSize(font_size);
+    font_for_widget.setPixelSize(set.font_size());
     diary->changeFontSize(font_for_widget);
     this->setFont(font_for_widget);
     this->close();
@@ -55,10 +49,12 @@ Settings::~Settings()
 void Settings::on_Apply_settings_button_clicked()
 {
     QString tmp = ui->Font_size_field->text();
-    font_size = tmp.toInt();
-    font_for_widget.setPixelSize(font_size);
+    set.font_size(tmp.toInt());
+    font_for_widget.setPixelSize(set.font_size());
     diary->changeFontSize(font_for_widget);
     this->setFont(font_for_widget);
+
+    set.use_96dpi(ui->dpi96_checkbox->isChecked());
 }
 
 void Settings::on_Cancel_settings_button_clicked()
@@ -66,48 +62,9 @@ void Settings::on_Cancel_settings_button_clicked()
     init_settings();
 }
 
-void Settings::write_to_file()
-{
-    QFile File(QString("settings"));
-    File.open(QFile::WriteOnly);
-    QDataStream inFile(&File);
-    inFile.setVersion(QDataStream::Qt_5_4);
-    inFile << *this;
-    File.flush();
-    File.close();
-    cout<<"Writing success\n";
-}
-
-void Settings::read_file()
-{
-    QFile File(QString("settings"));
-    File.open(QFile::ReadOnly);
-    if(File.isOpen()){
-        QDataStream outFile(&File);
-        outFile.setVersion(QDataStream::Qt_5_4);
-        outFile >> *this;
-        File.close();
-        cout<<"Reading success\n";
-    }
-    else{
-        cout<<"Couldn't open file\n";
-    }
-}
-
-QDataStream &operator >>(QDataStream &stream, Settings &A)
-{
-    stream >> A.font_size;
-    return stream;
-}
-
-QDataStream &operator <<(QDataStream &stream, const Settings &A)
-{
-    stream << A.font_size;
-    return stream;
-}
 
 void Settings::on_Save_settings_button_clicked()
 {
-    write_to_file();
+    set.save_settings();
     this->close();
 }

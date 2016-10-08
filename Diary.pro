@@ -23,7 +23,8 @@ SOURCES += Src/czas.cpp \
     Src/nakladki.cpp \
     Src/row.cpp \
     Src/settings.cpp \
-    Src/transfer.cpp
+    Src/transfer.cpp \
+    Src/settings_manager.cpp
 
 HEADERS  += Src/diary.h \
     Src/row.h \
@@ -35,6 +36,7 @@ HEADERS  += Src/diary.h \
     Src/transfer.h \
     Src/nakladki.h \
     Src/settings.h \
+    Src/settings_manager.h
 
 FORMS    += UI_src/diary.ui \
     UI_src/info.ui \

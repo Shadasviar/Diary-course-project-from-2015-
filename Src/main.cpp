@@ -21,12 +21,15 @@
 #include <QApplication>
 #include <QTextCodec>
 #include <QTranslator>
-
+#include "settings_manager.h"
 
 int main(int argc, char *argv[])
 {
-    //QGuiApplication::setAttribute(Qt::AA_DisableHighDpiScaling);
-    QGuiApplication::setAttribute(Qt::AA_Use96Dpi);
+    Settings_manager &set = Settings_manager::get_instance();
+    if(set.use_96dpi()){
+        QGuiApplication::setAttribute(Qt::AA_Use96Dpi);
+    }
+
     QApplication a(argc, argv);
     QTranslator *qt_translator = new QTranslator;
     QString file_translate = QApplication::applicationDirPath () + "/by.qm";

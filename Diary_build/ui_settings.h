@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
@@ -32,6 +33,7 @@ public:
     QGridLayout *gridLayout_3;
     QLineEdit *Font_size_field;
     QLabel *label;
+    QCheckBox *dpi96_checkbox;
     QFrame *frame;
     QGridLayout *gridLayout_2;
     QSpacerItem *horizontalSpacer;
@@ -61,6 +63,11 @@ public:
         label->setObjectName(QStringLiteral("label"));
 
         gridLayout_3->addWidget(label, 0, 0, 1, 1);
+
+        dpi96_checkbox = new QCheckBox(frame_2);
+        dpi96_checkbox->setObjectName(QStringLiteral("dpi96_checkbox"));
+
+        gridLayout_3->addWidget(dpi96_checkbox, 1, 1, 1, 1);
 
 
         gridLayout->addWidget(frame_2, 0, 0, 1, 1);
@@ -103,6 +110,7 @@ public:
     {
         Settings->setWindowTitle(QApplication::translate("Settings", "WizardPage", 0));
         label->setText(QApplication::translate("Settings", "Font size", 0));
+        dpi96_checkbox->setText(QApplication::translate("Settings", "Use 96 dpi", 0));
         Apply_settings_button->setText(QApplication::translate("Settings", "Apply", 0));
         Cancel_settings_button->setText(QApplication::translate("Settings", "Cancel", 0));
         Save_settings_button->setText(QApplication::translate("Settings", "Save", 0));

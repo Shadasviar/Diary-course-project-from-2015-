@@ -58,7 +58,8 @@ SOURCES       = ../Src/czas.cpp \
 		../Src/nakladki.cpp \
 		../Src/row.cpp \
 		../Src/settings.cpp \
-		../Src/transfer.cpp qrc_resourse.cpp \
+		../Src/transfer.cpp \
+		../Src/settings_manager.cpp qrc_resourse.cpp \
 		moc_diary.cpp \
 		moc_dbinterface.cpp \
 		moc_info.cpp \
@@ -76,6 +77,7 @@ OBJECTS       = czas.o \
 		row.o \
 		settings.o \
 		transfer.o \
+		settings_manager.o \
 		qrc_resourse.o \
 		moc_diary.o \
 		moc_dbinterface.o \
@@ -253,7 +255,8 @@ DIST          = ../diag/diag.docbook \
 		../Src/info.h \
 		../Src/transfer.h \
 		../Src/nakladki.h \
-		../Src/settings.h ../Src/czas.cpp \
+		../Src/settings.h \
+		../Src/settings_manager.h ../Src/czas.cpp \
 		../Src/dbinterface.cpp \
 		../Src/dbio.cpp \
 		../Src/dbmeth.cpp \
@@ -263,7 +266,8 @@ DIST          = ../diag/diag.docbook \
 		../Src/nakladki.cpp \
 		../Src/row.cpp \
 		../Src/settings.cpp \
-		../Src/transfer.cpp
+		../Src/transfer.cpp \
+		../Src/settings_manager.cpp
 QMAKE_TARGET  = Diary
 DESTDIR       = 
 TARGET        = Diary
@@ -571,8 +575,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Resources/resourse.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../Src/diary.h ../Src/row.h ../Src/dbmeth.h ../Src/czas.h ../Src/dbinterface.h ../Src/dbio.h ../Src/info.h ../Src/transfer.h ../Src/nakladki.h ../Src/settings.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Src/czas.cpp ../Src/dbinterface.cpp ../Src/dbio.cpp ../Src/dbmeth.cpp ../Src/diary.cpp ../Src/info.cpp ../Src/main.cpp ../Src/nakladki.cpp ../Src/row.cpp ../Src/settings.cpp ../Src/transfer.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Src/diary.h ../Src/row.h ../Src/dbmeth.h ../Src/czas.h ../Src/dbinterface.h ../Src/dbio.h ../Src/info.h ../Src/transfer.h ../Src/nakladki.h ../Src/settings.h ../Src/settings_manager.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Src/czas.cpp ../Src/dbinterface.cpp ../Src/dbio.cpp ../Src/dbmeth.cpp ../Src/diary.cpp ../Src/info.cpp ../Src/main.cpp ../Src/nakladki.cpp ../Src/row.cpp ../Src/settings.cpp ../Src/transfer.cpp ../Src/settings_manager.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../UI_src/diary.ui ../UI_src/info.ui ../UI_src/transfer.ui ../UI_src/nakladki.ui ../UI_src/settings.ui $(DISTDIR)/
 	$(COPY_FILE) --parents Translations/by.ts $(DISTDIR)/
 
@@ -1273,6 +1277,7 @@ moc_settings.cpp: ../../../../Qt/5.6/gcc_64/include/QtWidgets/QWizardPage \
 		../Src/czas.h \
 		../Src/dbio.h \
 		../../../../Qt/5.6/gcc_64/include/QtCore/QList \
+		../Src/settings_manager.h \
 		../Src/settings.h
 	/home/vlad/Qt/5.6/gcc_64/bin/moc $(DEFINES) -I/home/vlad/Qt/5.6/gcc_64/mkspecs/linux-g++ -I'/home/vlad/programming/CPP/Diary_BY_win ' -I/home/vlad/Qt/5.6/gcc_64/include -I/home/vlad/Qt/5.6/gcc_64/include/QtWidgets -I/home/vlad/Qt/5.6/gcc_64/include/QtGui -I/home/vlad/Qt/5.6/gcc_64/include/QtCore -I. ../Src/settings.h -o moc_settings.cpp
 
@@ -1772,7 +1777,8 @@ diary.o: ../Src/diary.cpp ../Src/diary.h \
 		../Src/nakladki.h \
 		../Src/settings.h \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/QWizardPage \
-		../../../../Qt/5.6/gcc_64/include/QtWidgets/qwizard.h
+		../../../../Qt/5.6/gcc_64/include/QtWidgets/qwizard.h \
+		../Src/settings_manager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o diary.o ../Src/diary.cpp
 
 info.o: ../Src/info.cpp ../Src/info.h \
@@ -2061,7 +2067,8 @@ main.o: ../Src/main.cpp ../Src/diary.h \
 		../../../../Qt/5.6/gcc_64/include/QtCore/QTextCodec \
 		../../../../Qt/5.6/gcc_64/include/QtCore/qtextcodec.h \
 		../../../../Qt/5.6/gcc_64/include/QtCore/QTranslator \
-		../../../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h
+		../../../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h \
+		../Src/settings_manager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Src/main.cpp
 
 nakladki.o: ../Src/nakladki.cpp ../Src/nakladki.h \
@@ -2421,6 +2428,7 @@ settings.o: ../Src/settings.cpp ../Src/settings.h \
 		../Src/czas.h \
 		../Src/dbio.h \
 		../../../../Qt/5.6/gcc_64/include/QtCore/QList \
+		../Src/settings_manager.h \
 		ui_settings.h \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/QAction \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/qaction.h \
@@ -2469,7 +2477,8 @@ settings.o: ../Src/settings.cpp ../Src/settings.h \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/QPushButton \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/5.6/gcc_64/include/QtWidgets/QSpacerItem
+		../../../../Qt/5.6/gcc_64/include/QtWidgets/QSpacerItem \
+		../../../../Qt/5.6/gcc_64/include/QtCore/QFile
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settings.o ../Src/settings.cpp
 
 transfer.o: ../Src/transfer.cpp ../Src/transfer.h \
@@ -2637,6 +2646,69 @@ transfer.o: ../Src/transfer.cpp ../Src/transfer.h \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/QSpacerItem \
 		../../../../Qt/5.6/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o transfer.o ../Src/transfer.cpp
+
+settings_manager.o: ../Src/settings_manager.cpp ../Src/settings_manager.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/QDataStream \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qdatastream.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qflags.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qiodevice.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qobject.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qstring.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qchar.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qlist.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qpair.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/QFile \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qfile.h \
+		../../../../Qt/5.6/gcc_64/include/QtCore/qfiledevice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settings_manager.o ../Src/settings_manager.cpp
 
 qrc_resourse.o: qrc_resourse.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resourse.o qrc_resourse.cpp
