@@ -33,19 +33,18 @@ class row
 {
 public:   
 
-    int year;
-    int month;
-    int day;
-    int hour;
-    int minutes;
-    int duration;
-    string name;
-    string place;
+    int year{0};
+    int month{0};
+    int day{0};
+    int hour{0};
+    int minutes {0};
+    int duration {0};
+    string name {" "};
+    string place {" "};
 
-    long long date;
-    long long time;
+    long long date {0};
+    long long time {0};
 
-    //void* fields[NUM_VARIABLES] = {&year, &month, &day, &hour, &minutes, &duration, &name, &place};
     void* fields[NUM_VARIABLES] = {&date, &time, &duration, &name, &place};
     enum types {t_long_long, t_long_long_last, t_int, t_int_last = 2, t_string, t_string_last};
 
@@ -53,9 +52,6 @@ public:
     friend QDataStream &operator <<(QDataStream &stream, const row &A);
     friend QDataStream &operator >>(QDataStream &stream, row &A);
 
-    row();
-    row(const row &);
-    row & operator=(const row &);
     void SetTimeBySecFrom70();
 
     QVariant getItem(int ind);

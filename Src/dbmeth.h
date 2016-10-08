@@ -83,7 +83,6 @@ public:
         row r;
         r=GetRow(index);
         *(T*)r.fields[field] = value;
-        //r.date=setDate(r);
         r.SetTimeBySecFrom70();
         Row.replace(index,r);
     }

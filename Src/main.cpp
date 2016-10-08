@@ -31,6 +31,12 @@ int main(int argc, char *argv[])
     }
 
     QApplication a(argc, argv);
+
+    /*Set font for app from settings*/
+    QFont font_for_widget;
+    font_for_widget.setPixelSize(set.font_size());
+    a.setFont(font_for_widget);
+
     QTranslator *qt_translator = new QTranslator;
     QString file_translate = QApplication::applicationDirPath () + "/by.qm";
         if ( !qt_translator->load(file_translate)) {
@@ -39,8 +45,7 @@ int main(int argc, char *argv[])
         else{
             qApp->installTranslator( qt_translator );
         }
-    //QTextCodec::setCodecForCStrings (QTextCodec::codecForName ("utf-8"));
-    //QTextCodec::setCodecForTr (QTextCodec::codecForName ("utf-8"));
+
     QTextCodec::setCodecForLocale(QTextCodec::codecForName ("utf-8"));
     Diary w;
     w.show();

@@ -35,12 +35,12 @@ dbinterface::dbinterface()
     }
 }
 
-int dbinterface::columnCount(const QModelIndex &parent) const
+int dbinterface::columnCount(const QModelIndex &) const
 {
     return dbm->getColumns();
 }
 
-int dbinterface::rowCount(const QModelIndex &parent) const
+int dbinterface::rowCount(const QModelIndex &) const
 {
     return dbm->RowsNum();
 }
@@ -146,7 +146,7 @@ QString dbinterface::nearest()
     return qs;
 }
 
-bool dbinterface::insertRows(int row1, int count, const QModelIndex &parent)
+bool dbinterface::insertRows(int, int, const QModelIndex &parent)
 {
     row r;
     beginInsertRows(parent, this->rowCount(parent), this->rowCount(parent));
@@ -155,7 +155,7 @@ bool dbinterface::insertRows(int row1, int count, const QModelIndex &parent)
     return true;
 }
 
-bool dbinterface::removeRows(int row, int count, const QModelIndex &parent)
+bool dbinterface::removeRows(int row, int , const QModelIndex &parent)
 {
     beginRemoveRows(parent, row,row);
     dbm->DelRow(row);

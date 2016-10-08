@@ -65,47 +65,6 @@ QDataStream &operator >>(QDataStream &stream, row &A)
     return stream;
 }
 
-row::row(){
-    year=0;
-    month=0;
-    day=0;
-    hour=0;
-    minutes=0;
-    duration=0;
-    date=0;
-    time = 0;
-    name=" ";
-    place=" ";
-}
-
-
-row::row(const row &in){
-    year = in.year;
-    month = in.month;
-    day = in.day;
-    hour = in.hour;
-    minutes = in.minutes;
-    date = in.date;
-    duration = in.duration;
-    name = in.name;
-    place = in.place;
-    time = in.time;
-}
-
-
-row &row::operator=(const row &in){
-    year = in.year;
-    month = in.month;
-    day = in.day;
-    hour = in.hour;
-    minutes = in.minutes;
-    date = in.date;
-    duration = in.duration;
-    name = in.name;
-    place = in.place;
-    time = in.time;
-    return *this;
-}
 
 void row::SetTimeBySecFrom70()
 {

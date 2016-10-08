@@ -31,8 +31,6 @@ dbio::dbio()
 }
 
 void dbio::Write(QList<row> &Row){
-    //list<row> lst=Row.toStdList();
-    //fstream fs("db.bin",ios_base::binary|ios_base::out);
     QFile dbFile(QString("db.bin"));
     dbFile.open(QFile::WriteOnly);
     QDataStream inFile(&dbFile);
@@ -44,16 +42,12 @@ void dbio::Write(QList<row> &Row){
 }
 
 void dbio::Read(QList<row> &lst){
-        //ifstream in("db.bin",ios_base::in|ios_base::binary);
         QFile dbFile(QString("db.bin"));
         dbFile.open(QFile::ReadOnly);
         if(dbFile.isOpen()){
-          //boost::archive::binary_iarchive ia(in);
             QDataStream outFile(&dbFile);
             outFile.setVersion(QDataStream::Qt_5_4);
             outFile >> lst;
-            //ia>>lst;
-            //in.close();
             dbFile.close();
             cout<<"Reading success\n";
         }

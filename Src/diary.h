@@ -50,7 +50,6 @@ private slots:
     void on_next_day_button_clicked();
     void on_return_button_clicked();
     void on_nakladki_button_clicked();
-
     void on_Settings_button_clicked();
 
 signals:
