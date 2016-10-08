@@ -26,7 +26,7 @@
 #include <QVariant>
 #include <QList>
 
-class dbmeth : public dbio
+class dbmeth
 {
 public:
     enum operation {do_nothing, del};

@@ -25,8 +25,8 @@ class dbio
 {
 public:
     dbio();
-    void Write(QList<row> &Row);
-    void Read(QList<row> &lst);
+    static void Write(QList<row> &Row);
+    static void Read(QList<row> &lst);
 
 private:
 

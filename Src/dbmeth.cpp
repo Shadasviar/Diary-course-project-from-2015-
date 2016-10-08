@@ -23,6 +23,7 @@
 #include <string>
 #include <algorithm>
 #include <exception>
+#include "dbio.h"
 
 #define TOUPPER(in_string) transform(in_string.begin(),in_string.end(),in_string.begin(),::toupper);
 
@@ -30,7 +31,7 @@ using namespace std;
 
 dbmeth::dbmeth()
 {
-    Read(Row);
+    dbio::Read(Row);
     rowSwaped=false;
     counter=0;
 }

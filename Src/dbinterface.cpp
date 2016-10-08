@@ -20,6 +20,7 @@
 #include "dbinterface.h"
 #include "transfer.h"
 #include "dbmeth.h"
+#include "dbio.h"
 #include <QDateTime>
 #include <QDate>
 #include <QTime>
@@ -128,7 +129,7 @@ bool dbinterface::setData(const QModelIndex &index, const QVariant &value, int r
              dbm->EditRow(index.row(),index.column(),qs.toStdString());  //type only is important here
          }
      }
-     dbm->Write(dbm->Row);
+     dbio::Write(dbm->Row);
      return true;
 }
 
@@ -180,7 +181,7 @@ QString dbinterface::DelRow(int index)
 QString dbinterface::Save()
 {
     dbm->filterOff();
-    dbm->Write(dbm->Row);
+    dbio::Write(dbm->Row);
     return tr("Saved");
     dataChanged(QModelIndex(),QModelIndex());
 }
