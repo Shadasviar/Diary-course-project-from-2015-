@@ -13,30 +13,30 @@ TEMPLATE = app
 CONFIG += c++14
 
 
-SOURCES += Src/czas.cpp \
-    Src/dbinterface.cpp \
-    Src/dbio.cpp \
-    Src/dbmeth.cpp \
-    Src/diary.cpp \
-    Src/info.cpp \
-    Src/main.cpp \
-    Src/nakladki.cpp \
-    Src/row.cpp \
-    Src/settings.cpp \
-    Src/transfer.cpp \
-    Src/settings_manager.cpp
+SOURCES += Src/cpp/czas.cpp \
+    Src/cpp/dbinterface.cpp \
+    Src/cpp/dbio.cpp \
+    Src/cpp/dbmeth.cpp \
+    Src/cpp/diary.cpp \
+    Src/cpp/info.cpp \
+    Src/cpp/main.cpp \
+    Src/cpp/nakladki.cpp \
+    Src/cpp/row.cpp \
+    Src/cpp/settings.cpp \
+    Src/cpp/transfer.cpp \
+    Src/cpp/settings_manager.cpp
 
-HEADERS  += Src/diary.h \
-    Src/row.h \
-    Src/dbmeth.h \
-    Src/czas.h \
-    Src/dbinterface.h \
-    Src/dbio.h \
-    Src/info.h \
-    Src/transfer.h \
-    Src/nakladki.h \
-    Src/settings.h \
-    Src/settings_manager.h
+HEADERS  += Src/headers/diary.h \
+    Src/headers/row.h \
+    Src/headers/dbmeth.h \
+    Src/headers/czas.h \
+    Src/headers/dbinterface.h \
+    Src/headers/dbio.h \
+    Src/headers/info.h \
+    Src/headers/transfer.h \
+    Src/headers/nakladki.h \
+    Src/headers/settings.h \
+    Src/headers/settings_manager.h
 
 FORMS    += UI_src/diary.ui \
     UI_src/info.ui \
