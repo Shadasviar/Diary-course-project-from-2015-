@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Diary
 TEMPLATE = app
 CONFIG += c++14
+INCLUDEPATH += Src/headers
 
 
 SOURCES += Src/cpp/czas.cpp \
