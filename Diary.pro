@@ -49,6 +49,7 @@ RESOURCES += \
     Resources/resourse.qrc
 
 TRANSLATIONS+= Translations/by.ts
+    Translations/ru.ts
 
 DISTFILES += \
     diag/diag.docbook \
@@ -72,4 +73,5 @@ DISTFILES += \
     lic \
     LICENSE \
     Translations/by.ts \
+    Translations/ru.ts \
     diag.xmi

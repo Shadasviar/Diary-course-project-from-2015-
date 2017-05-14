@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     a.setFont(font_for_widget);
 
     QTranslator *qt_translator = new QTranslator;
-    QString file_translate = QApplication::applicationDirPath () + "/by.qm";
+    QString file_translate = QApplication::applicationDirPath () + "/ru.qm";
         if ( !qt_translator->load(file_translate)) {
           delete qt_translator;
         }
